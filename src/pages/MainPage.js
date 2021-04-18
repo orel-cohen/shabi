@@ -14,7 +14,9 @@ const MainPage = () => {
 
         <Layout className="layout">
             <Header className="header">
-                <div className="logo" />
+                <div className="logo" >
+                    Shabi
+                </div>
                 <Menu theme="dark" key="user" mode="horizontal">
                     <SubMenu
                         title={
