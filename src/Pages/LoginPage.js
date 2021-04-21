@@ -1,4 +1,11 @@
+import React, { useState } from 'react';
+
 import { Form, Input, Button, Checkbox } from 'antd';
+import 'antd/dist/antd.css';
+
+import { LoadingComponent } from "../Components/LoadingComponent";
+import { Link } from 'react-router-dom';
+
 const layout = {
   labelCol: {
     span: 8,
@@ -15,8 +22,23 @@ const tailLayout = {
 };
 
 const LoginPage = () => {
+  const [user, setUser] = useState({ password: "", username: "" })
+  const [isLoading, setIsLoading] = useState(false);
+  const adminName = "Orel Cohen";
+  const adminPass = "123456Oo";
+
   const onFinish = (values) => {
     console.log('Success:', values);
+
+    // set is loading true
+
+    // check if the user in the server
+    if (values.username === adminName && values.password === adminPass) {
+      setUser(adminPass, adminName);
+    }
+
+
+    // go to dashboard
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -24,51 +46,63 @@ const LoginPage = () => {
   };
 
   return (
-    <Form
-      {...layout}
-      name="basic"
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
-      <Form.Item
-        label="Username"
-        name="username"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your username!',
-          },
-        ]}
+    <div>
+      {
+        (user.username != "") ? (
+          <Link to="/about" >
+            test
+            </Link>
+        ) :
+        <Form
+        {...layout}
+        name="basic"
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
       >
-        <Input />
-      </Form.Item>
+        <Form.Item
+          label="מספר אישי"
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: 'הכנס מספר אישי',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+  
+        <Form.Item
+          label="סיסמה"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'הכנס סיסמה',
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+  
+        {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item> */}
+  
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            כניסה
+          </Button>
+        </Form.Item>
+      </Form>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+      }
+    </div>
 
-      <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
 
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
   );
 };
 
