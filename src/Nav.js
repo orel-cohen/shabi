@@ -1,17 +1,20 @@
 import './App.css';
+import { Link } from 'react-router-dom';
 
 function Nav() {
   return (
     <nav className="nav" >
-        <h3>LOGO</h3>
-        <ul className="nav-links">
-            <li>
-                About
+      <h3>LOGO</h3>
+      <ul className="nav-links">
+        <Link to='/login'>
+          <li>
+          Login
             </li>
-            <li>
-                Login
+        </Link>
+        <li>
+          About
             </li>
-        </ul>
+      </ul>
     </nav>
   );
 }
