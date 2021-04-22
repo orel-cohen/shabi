@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import 'antd/dist/antd.css';
 
+import AboutPage from "./AboutPage";
 import { LoadingComponent } from "../Components/LoadingComponent";
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const layout = {
   labelCol: {
@@ -24,6 +25,11 @@ const tailLayout = {
 const LoginPage = () => {
   const [user, setUser] = useState({ password: "", username: "" })
   const [isLoading, setIsLoading] = useState(false);
+
+  // Use for route in respond to user input
+  const history = useHistory();
+
+  // Admin details
   const adminName = "Orel Cohen";
   const adminPass = "123456Oo";
 
@@ -35,8 +41,8 @@ const LoginPage = () => {
     // check if the user in the server
     if (values.username === adminName && values.password === adminPass) {
       setUser(adminPass, adminName);
+      history.push("/dashboard");
     }
-
 
     // go to dashboard
   };
@@ -47,12 +53,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      {
-        (user.username != "") ? (
-          <Link to="/about" >
-            test
-            </Link>
-        ) :
+      
         <Form
         {...layout}
         name="basic"
@@ -99,7 +100,7 @@ const LoginPage = () => {
         </Form.Item>
       </Form>
 
-      }
+      
     </div>
 
 
