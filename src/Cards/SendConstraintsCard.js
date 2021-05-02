@@ -12,7 +12,7 @@ function SendConstraintsCard(props) {
     return (
         <Card onClick={onClickHandle} style={{ width: 300 }}>
            {/* {props.username} */}
-            <p>החלף תורנות</p>
+            <p>מעבר לדף הזנה של אילוצים</p>
             <p>my score</p>
         </Card>
     );

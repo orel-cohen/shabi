@@ -1,3 +1,22 @@
+.layout {
+  height: 100vh;
+  display: flex;
+
+  /* Direction of the items, can be row or column */
+  flex-direction: column;
+}
+
+.header {
+  height: 60px;
+}
+.footer {
+    height: 30px;
+}
+.content {
+  flex: 1;
+}
+
+
 .App {
   text-align: center;
 }
@@ -5,9 +24,10 @@
 .nav {
   display: flex;
   justify-content: space-around;
+  padding-right: 20;
   align-items: center;
-  min-height: 10vh;
-  background: rgb(73, 79, 82);
+  min-height: 7vh;
+  background: #ABDEE6;
   color: white;
 }
 
@@ -17,4 +37,11 @@
   justify-content: space-around;
   align-items: center;
   list-style: none;
+}
+
+.haeder {
+  background: #83cbce;
+  color: #83cbce;
+  background-color: #83cbce;
+  
 }

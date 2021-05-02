@@ -5,7 +5,12 @@ function SendConstraintsPage() {
 
     return (
         <div>
-            שליחת אילוצים
+            <Card>
+                Content
+            </Card>
+            <h1>
+                שליחת אילוצים
+            </h1>
         </div>
     );
 }

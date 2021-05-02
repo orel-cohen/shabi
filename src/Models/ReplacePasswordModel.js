@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Modal, Button, Card } from 'antd';
 
-const SwapRequestModel = () => {
+const ReplacePasswordModel = () => {
   const [visible, setVisible] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [modalText, setModalText] = React.useState('Content of the modal');
@@ -28,7 +28,7 @@ const SwapRequestModel = () => {
   return (
     <>
       <Card onClick={showModal}>
-        החלף תורנות עם אדם אחר
+        החלף סיסמה
       </Card>
       <Modal
         title="Title"
@@ -43,4 +43,4 @@ const SwapRequestModel = () => {
   );
 };
 
-export default SwapRequestModel;
+export default ReplacePasswordModel;

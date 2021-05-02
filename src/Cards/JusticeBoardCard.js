@@ -1,13 +1,12 @@
 import { Card } from 'antd';
 
-function JusticeBoardPage(props) {
+function JusticeBoardCard(props) {
     return (
         <Card style={{ width: 300 }}>
            {/* {props.username} */}
-            <p>username</p>
-            <p>my score</p>
+            <p>צפייה בלוח צדק</p>
         </Card>
     );
 }
 
-export default JusticeBoardPage;
+export default JusticeBoardCard;
