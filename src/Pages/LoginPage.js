@@ -31,7 +31,7 @@ const LoginPage = () => {
 
   // Admin details
   const adminName = "Orel Cohen";
-  const adminPass = "123456Oo";
+  const adminPass = "123456";
 
   const onFinish = (values) => {
     console.log('Success:', values);
