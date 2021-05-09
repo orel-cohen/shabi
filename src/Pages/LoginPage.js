@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import { Form, Input, Button, Checkbox } from 'antd';
 import 'antd/dist/antd.css';
+
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+
 
 import AboutPage from "./AboutPage";
 import { LoadingComponent } from "../Components/LoadingComponent";
@@ -23,28 +28,32 @@ const tailLayout = {
 };
 
 const LoginPage = () => {
-  const [user, setUser] = useState({ password: "", username: "" })
+  const [userLoginData, setUserLoginData] = useState({ password: "", username: "" })
   const [isLoading, setIsLoading] = useState(false);
 
   // Use for route in respond to user input
   const history = useHistory();
 
-  // Admin details
-  const adminName = "Orel Cohen";
-  const adminPass = "123456";
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const onFinish = async (values) => {
 
     // set is loading true
+    setIsLoading(true);
 
-    // check if the user in the server
-    if (values.username === adminName && values.password === adminPass) {
-      setUser(adminPass, adminName);
-      history.push("/dashboard");
-    }
+    setUserLoginData(values.password, values.username);
 
-    // go to dashboard
+    axios.post('http://localhost:4000/login', userLoginData)
+        .then(response => {
+          console.log("res:");
+          console.log(response);
+          if (response.data) {
+            history.push("/dashboard");
+          } else {
+            values.username = "";
+            values.password = "";
+
+          }
+        });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -53,57 +62,59 @@ const LoginPage = () => {
 
   return (
     <div>
-      
-        <Form
-        {...layout}
-        name="basic"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          label="מספר אישי"
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: 'הכנס מספר אישי',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-  
-        <Form.Item
-          label="סיסמה"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'הכנס סיסמה',
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-  
-        {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+      {
+        isLoading ? <LoadingOutlined style={{ fontSize: 24 }} spin /> :
+
+
+          <Form
+            {...layout}
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Form.Item
+              label="מספר אישי"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: 'הכנס מספר אישי',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="סיסמה"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'הכנס סיסמה',
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            {/* <Form.Item {...tailLayout} name="remember" valuePropName="checked">
           <Checkbox>Remember me</Checkbox>
         </Form.Item> */}
-  
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            כניסה
+
+            <Form.Item {...tailLayout}>
+              <Button type="primary" htmlType="submit">
+                כניסה
           </Button>
-        </Form.Item>
-      </Form>
+            </Form.Item>
+          </Form>
 
-      
+
+      }
     </div>
-
-
   );
 };
 
